@@ -2,8 +2,9 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './src/backbone-js/app.js',
+  // entry: './src/backbone-js/app.js',
   // entry: './src/angular-js/app.js',
+  entry: './src/react-js/index.jsx',
   devtool: 'inline-source-map',
   devServer: {
     contentBase: './dist',
@@ -26,6 +27,7 @@ module.exports = {
   module: {
     rules: [
       { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' },
+      { test: /\.jsx$/, exclude: /node_modules/, loader: 'babel-loader' },
       {
         test: /\.(html)$/,
         use: {
