@@ -16,3 +16,6 @@ node_modules/
 
 # Distribution Files
 dist/
+
+# vscode settings
+.vscode/
