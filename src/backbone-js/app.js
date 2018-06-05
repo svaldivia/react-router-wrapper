@@ -1,5 +1,5 @@
 import Router from './router';
 
-export const app = new Router();
+export const router = new Router();
 
 Backbone.history.start();

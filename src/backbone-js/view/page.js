@@ -2,7 +2,7 @@ import Backbone from 'backbone';
 import $ from 'jquery';
 import _ from 'underscore';
 
-import { app  } from '../app.js';
+import { router  } from '../app.js';
 import PageView from '../template/page.html';
 
 export default Backbone.View.extend({
@@ -14,6 +14,7 @@ export default Backbone.View.extend({
 
   initialize: function (count) {
     this.count = parseInt(count);
+    this.router = router;
 
     this.render();
   },
@@ -26,7 +27,7 @@ export default Backbone.View.extend({
 
   addToCount: function () {
     this.count += 1;
-    app.navigate(`#test/${this.count}`, true);
+    this.router.navigate(`#test/${this.count}`,  {trigger: true});
   },
 
   subtractToCount: function () {
@@ -34,6 +35,6 @@ export default Backbone.View.extend({
       return;
     }
     this.count -= 1;
-    app.navigate(`test/${this.count}`,true);
+    this.router.navigate(`#test/${this.count}`, {trigger: true});
   }
 });

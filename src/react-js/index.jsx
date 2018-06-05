@@ -1,6 +1,9 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+
+import BackbonePageWrapper from './components/BackboneWrapper.jsx';
+import PageView from '../backbone-js/view/page.js';
 
 const BkTools = () => (
   <Router>
@@ -16,27 +19,32 @@ const BkTools = () => (
           <Link to="/topics">Topics</Link>
         </li>
         <li>
-          <Link to="/test">Test</Link>
+          <Link to="/test/0">Test</Link>
         </li>
       </ul>
 
       <hr />
-
-      <Route exact path="/" component={Home} />
-      <Route path="/about" component={About} />
-      <Route path="/topics" component={Topics} />
-      <Route path="/test" component={Test} />
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/about" component={About} />
+        <Route path="/topics" component={Topics} />
+        <Route path="/test/:counter" component={Test} />
+        <Route render={() => <h1>No route found!</h1>}/>
+      </Switch>
     </div>
   </Router>
 );
 
-const Test = () => (
-  <div>
-    <AngularPageWrapper
-      ngModule="bench.app.mainapp"
+const Test = ({ match, history }) => {
+  const urlParams = [match.params.counter];
+  return (
+    <BackbonePageWrapper
+      View={PageView}
+      urlParams={urlParams}
+      history={history}
     />
-  </div>
-);
+  );
+}
 
 const Home = () => (
   <div>
@@ -83,5 +91,5 @@ const Topic = ({ match }) => (
 
 render(
   <BkTools />,
-  document.getElementById('container'),
+  document.getElementById('react-container'),
 );
